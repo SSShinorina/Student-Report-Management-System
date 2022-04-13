@@ -110,12 +110,49 @@ int main()
     return 0;
 }
 void create_student(){
+    student stud;
+    ofStream oFile;
+    oFile.open("student.dat", ios::binary|ios::app);
+    stud.getdata();
+    oFile.write(reinterpret_cast<char *> (&stud), sizeof(student));
+    oFile.close();
+    cout<<"\n\nStudent record has been created.";
+    cin.ignore();
+    cin.get();
 }
 
 void display_all(){
+    student stud;
+    ifStream inFile;
+    inFile.open("student.dat", ios::binary);
+    if(!inFile){
+            cout<<"File could not be open!!! Press any Key to exit.";
+            cin.ignore();
+            cin.get();
+            return;
+    }
+    cout<<"\n\n\n\tDisplaying All Records.\n\n";
+    while(inFile.read(reinterpret_cast<char *> (&stud), sizeof(student))){
+        st.showdata();
+        cout<<"\n\n=========================\n";
+    }
+    inFile.close();
+    cin.ignore();
+    cin.get();
 }
 
 void dipslay_sp(int n){
+    student stud;
+    ifstream iFile;
+    iFile.open("student.dat", ios::binary);
+    if(!iFile){
+        cout<<"File couldn't be open. Press any other key to exit";
+        cin.ignore();
+        cin.get();
+        return;
+    }
+    bool flag = false;
+
 }
 
 void delete_student(int n){
